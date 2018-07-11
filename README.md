@@ -1,12 +1,12 @@
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
+> Disclaimer: this is experimental, use deliberately and with caution.
+
 # revisionist
 
 base `R` `install.packages` is a greedy version installer. This is great for working on the tip of the CRAN repository, but not great in an enterprise work environment, where packages and script need to work regardless of present CRAN status. 
 
 `{revisionist}` populates a local src directory with conservative package version logic.
-
-> Disclaimer: this is experimental, use deliberately and with caution.
 
 ## Installation
 
