@@ -14,6 +14,12 @@ base `R` `install.packages` is a greedy version installer. This is great for wor
 remotes::install_github('yonicd/revisionist')
 ```
 
+## Usage
+
+```r
+revisionist::build_src_dir('ggplot2','2.0.0')
+```
+
 ## Details
 
 The user supplies the target package and either: 
