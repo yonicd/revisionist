@@ -29,11 +29,13 @@ libDir <- 'lib'
 if(!dir.exist(libDir))
   dir.create(libDir)
 
-mycran <- file.path(tempdir(),'pkg')
+mycran <- file.path(tempdir(),'_pkgs')
+
+list.files(file.path(mycran,'src/contrib'))
 
 install.packages('ggplot2',
                  lib = libDir,
-                 contriburl = mycran,
+                 contriburl = file.path('file:/',mycran),
                  type = "source",
                  INSTALL_opts="--no-multiarch")
 
