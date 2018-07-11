@@ -33,7 +33,7 @@ find_children <- function(package,uri){
 
   DESC <- read.dcf(DESC_PATH)
 
-  idx <- intersect(c('Depends','Imports','Suggests'),colnames(DESC))
+  idx <- intersect(c('Depends','Imports'),colnames(DESC))
 
   xx <- unlist(lapply(strsplit(
     paste0(DESC[,idx],collapse = ','),

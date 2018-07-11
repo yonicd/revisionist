@@ -35,7 +35,7 @@ list.files(file.path(mycran,'src/contrib'))
 
 install.packages('ggplot2',
                  lib = libDir,
-                 contriburl = file.path('file:/',mycran),
+                 contriburl = file.path('file:/',mycran,'src/contrib'),
                  type = "source",
                  INSTALL_opts="--no-multiarch")
 
