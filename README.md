@@ -11,7 +11,7 @@ base `R` `install.packages` is a greedy version installer. This is great for wor
 ## Installation
 
 ``` r
-remotes::install_github('yonicd/noplyr')
+remotes::install_github('yonicd/revisionist')
 ```
 
 ## Details
