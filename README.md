@@ -18,6 +18,25 @@ remotes::install_github('yonicd/revisionist')
 
 ```r
 revisionist::build_src_dir('ggplot2','2.0.0')
+
+# packages are downloaded to file.path(tempdir(),'pkg/contrib/src')
+
+# the directory is populated with a PACKAGES file and acts as a src directory
+# for local installation.
+
+libDir <- 'lib'
+
+if(!dir.exist(libDir))
+  dir.create(libDir)
+
+mycran <- file.path(tempdir(),'pkg')
+
+install.packages('ggplot2',
+                 lib = libDir,
+                 contriburl = mycran,
+                 type = "source",
+                 INSTALL_opts="--no-multiarch")
+
 ```
 
 ## Details
