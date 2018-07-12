@@ -10,7 +10,7 @@
 #' @importFrom purrr map2_df
 build_map <- function(pkg,version = NA, date = NA){
 
-  x <- purrr::map2_df(pkg,version,get_archive, date)
+  x <- purrr::map2_df(pkg,version,get_archive, date,fields = c('Depends','Imports','Suggests'))
 
   pkg_map <- recurse(x,x$date[1],x)
 
@@ -26,6 +26,17 @@ build_map <- function(pkg,version = NA, date = NA){
 #' @import dplyr
 prune_map <- function(x){
   x%>%
-    dplyr::select(date,package = parent,version=parent_version)%>%
-    dplyr::distinct()
+    dplyr::select(date, 
+                  package = parent,
+                  version = parent_version,
+                  sha = parent_sha)%>%
+    dplyr::distinct()%>%
+    dplyr::mutate(
+      github_archive = sprintf('https://github.com/cran/%s/tree/%s',package,sha),
+      cran_archive = sprintf('https://cran.r-project.org/src/contrib/Archive/%s/%s_%s.tar.gz',
+                        package,
+                        package,
+                        version)
+    )
+    
 }

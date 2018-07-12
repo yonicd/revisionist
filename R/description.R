@@ -47,7 +47,7 @@ description_get <- function(x,outdir = tempdir()){
   if(!dir.exists(td))
     dir.create(td)
   
-  FILE <- sprintf('DESCRIPTION_%s_%s',x$package,x$version)
+  FILE <- sprintf('DESCRIPTION_%s_%s',x$package,x$sha)
   
   utils::download.file(sprintf('https://raw.githubusercontent.com/cran/%s/%s/DESCRIPTION',x$package,x$sha),
                        file.path(td,FILE))
@@ -74,6 +74,7 @@ description_parse <- function(file,fields = c('Depends','Imports'),date){
       date = date,
       parent = as.character(DESC[,'Package']),
       parent_version = as.character(DESC[,'Version']),
+      parent_sha = strsplit(file,'_')[[1]][3],
       child = gsub('\\s+(.*?)$','',raw),
       child_version = ifelse(grepl('\\s',raw),
                        gsub('^(.*?)\\s+','',raw),NA),
@@ -84,12 +85,12 @@ description_parse <- function(file,fields = c('Depends','Imports'),date){
 }
 
 #' @export
-get_archive <- function(package, version, date = NA){
+get_archive <- function(package, version, date = NA, fields = c('Depends','Imports')){
   
   x <- description_commits(package,version,date)
   
   if(is.null(x))
     return(dplyr::tibble())
  
-  x%>%description_get()%>%description_parse(date = x$date)
+  x%>%description_get()%>%description_parse(date = x$date,fields = fields)
 }
