@@ -1,0 +1,57 @@
+---
+output: github_document
+always_allow_html: yes
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "tools/readme/README-"
+)
+```
+
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+
+> Disclaimer: this is experimental, use deliberately and with caution.
+
+# revisionist
+
+base `R` `install.packages` is a greedy version installer. This is great for working on the tip of the CRAN repository, but not great in an enterprise work environment, where packages and script need to work regardless of present CRAN status. 
+
+`{revisionist}` populates a local src directory with conservative package version logic.
+
+## Installation
+
+``` r
+remotes::install_github('yonicd/revisionist')
+```
+
+## Usage
+
+```{r,eval=FALSE}
+x <- revisionist::build_map('slickR','0.1.0')
+knitr::kable(x)
+```
+
+```{r, echo=FALSE}
+x <- revisionist::build_map('slickR','0.1.0')
+knitr::kable(x)
+```
+
+```{r}
+knitr::kable(revisionist::prune_map(x))
+```
+
+## Details
+
+The user supplies the target package and either: 
+
+  - target package version, then the archiving date is located on [CRAN](https://cran.r-project.org/src/contrib/Archive)
+  - target package upper limit archive date to from which to download the package
+  
+  `{revisionist}` then uses github api to find what package version are needed under the constraints defined.
+
+  

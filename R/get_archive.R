@@ -5,13 +5,13 @@
 #' @param min_date PARAM_DESCRIPTION, Default: NA
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
-#' @rdname get_archive
+#' @rdname get_archive_old
 #' @export
 #' @import httr
 #' @importFrom rvest html_table
 #' @importFrom purrr flatten_df set_names
 #' @import dplyr
-get_archive <- function(package, min_version = NA, min_date = NA){
+get_archive_old <- function(package, min_version = NA, min_date = NA){
 
   cran_uri <- sprintf('https://cran.r-project.org/src/contrib/Archive/%s/',package)
 
